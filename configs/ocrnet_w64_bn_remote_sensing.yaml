@@ -1,8 +1,14 @@
+MEAN: [0.32536328, 0.37949753, 0.28590902]
+STD: [0.09531121, 0.10779824, 0.11463393]
+
 TRAIN_CROP_SIZE: (256, 256)
 EVAL_CROP_SIZE: (256, 256)
 AUG:
     AUG_METHOD: "unpadding"
     FIX_RESIZE_SIZE: (256, 256)
+    MIRROR: True
+    FLIP: True
+    FLIP_RATIO: 0.5
 
 BATCH_SIZE: 32
 DATASET:
@@ -46,9 +52,12 @@ TRAIN:
     SNAPSHOT_EPOCH: 1
     SYNC_BATCH_NORM: True
 TEST:
-    TEST_MODEL: "output/ocrnet_w64_bn_remote_sensing/1"
+    TEST_MODEL: "output/ocrnet_w64_bn_remote_sensing/best_model"
 SOLVER:
     LR: 0.01
-    LR_POLICY: "poly"
-    OPTIMIZER: "sgd"
-    NUM_EPOCHS: 100
+#    LR_POLICY: "poly"
+    OPTIMIZER: "adam"
+    NUM_EPOCHS: 60
+
+    LR_POLICY: "piecewise"
+    DECAY_EPOCH: [25, 45]
