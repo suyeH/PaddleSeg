@@ -35,6 +35,7 @@ cfg.TRAIN_CROP_SIZE = tuple()
 cfg.NUM_TRAINERS = 1
 # 多进程训练进程ID
 cfg.TRAINER_ID = 0
+cfg.LOG_DIR = "./wandb_logs"
 ########################## 数据载入配置 #######################################
 # 数据载入时的并发数, 建议值8
 cfg.DATALOADER.NUM_WORKERS = 8

@@ -1,0 +1,54 @@
+TRAIN_CROP_SIZE: (256, 256)
+EVAL_CROP_SIZE: (256, 256)
+AUG:
+    AUG_METHOD: "unpadding"
+    FIX_RESIZE_SIZE: (256, 256)
+
+BATCH_SIZE: 32
+DATASET:
+    DATA_DIR: "./dataset/rs_data"
+    NUM_CLASSES: 7
+    TRAIN_FILE_LIST: "./dataset/rs_data/train_list.txt"
+    VAL_FILE_LIST: "./dataset/rs_data/val_list.txt"
+    TEST_FILE_LIST: "./dataset/rs_data/testA_list.txt"
+    # VIS_FILE_LIST: "./dataset/rs_data/test.txt"
+
+#DATASET:
+#    DATA_DIR: "./dataset/cityscapes/"
+#    IMAGE_TYPE: "rgb"  # choice rgb or rgba
+#    NUM_CLASSES: 19
+#    TEST_FILE_LIST: "./dataset/cityscapes/val.list"
+#    TRAIN_FILE_LIST: "./dataset/cityscapes/train.list"
+#    VAL_FILE_LIST: "./dataset/cityscapes/val.list"
+#    VIS_FILE_LIST: "./dataset/cityscapes/val.list"
+#    IGNORE_INDEX: 255
+#    SEPARATOR: " "
+FREEZE:
+    MODEL_FILENAME: "model"
+    PARAMS_FILENAME: "params"
+MODEL:
+    MODEL_NAME: "ocrnet"
+    DEFAULT_NORM_TYPE: "bn"
+    HRNET:
+        STAGE2:
+            NUM_CHANNELS: [64, 128]
+        STAGE3:
+            NUM_CHANNELS: [64, 128, 256]
+        STAGE4:
+            NUM_CHANNELS: [64, 128, 256, 512]
+    OCR:
+        OCR_MID_CHANNELS: 512
+        OCR_KEY_CHANNELS: 256
+    MULTI_LOSS_WEIGHT: [1.0, 1.0]
+TRAIN:
+    PRETRAINED_MODEL_DIR: u"./pretrained_model/hrnet_w64_bn_imagenet"
+    MODEL_SAVE_DIR: "output/ocrnet_w64_bn_remote_sensing"
+    SNAPSHOT_EPOCH: 1
+    SYNC_BATCH_NORM: True
+TEST:
+    TEST_MODEL: "output/ocrnet_w64_bn_remote_sensing/1"
+SOLVER:
+    LR: 0.01
+    LR_POLICY: "poly"
+    OPTIMIZER: "sgd"
+    NUM_EPOCHS: 100
