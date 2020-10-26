@@ -54,16 +54,16 @@ MODEL:
     MULTI_LOSS_WEIGHT: [1.0, 1.0]
 TRAIN:
     PRETRAINED_MODEL_DIR: u"./pretrained_model/ocrnet_w18_bn_cityscapes"
-    MODEL_SAVE_DIR: "output/ocrnet_w18_bn_remote_sensing/more_data_aug"
-    #RESUME_MODEL_DIR: "output/ocrnet_w18_bn_remote_sensing/50"
-    SNAPSHOT_EPOCH: 1
+    MODEL_SAVE_DIR: "output/ocrnet_w18_bn_remote_sensing/more_data_aug_normalize"
+    RESUME_MODEL_DIR: "output/ocrnet_w18_bn_remote_sensing/more_data_aug_normalize/66"
+    SNAPSHOT_EPOCH: 3
     SYNC_BATCH_NORM: True
 TEST:
     TEST_MODEL: "output/ocrnet_w18_bn_remote_sensing/best_model"
 SOLVER:
-    LR: 0.01
+    LR: 0.05
     LR_POLICY: "poly"
-    OPTIMIZER: "adam"
+    OPTIMIZER: "sgd"
     NUM_EPOCHS: 100
 
 #    LR_POLICY: "poly"

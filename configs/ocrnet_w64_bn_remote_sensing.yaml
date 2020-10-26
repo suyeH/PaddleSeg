@@ -48,16 +48,16 @@ MODEL:
     MULTI_LOSS_WEIGHT: [1.0, 1.0]
 TRAIN:
     PRETRAINED_MODEL_DIR: u"./pretrained_model/hrnet_w64_bn_imagenet"
-    MODEL_SAVE_DIR: "output/ocrnet_w64_bn_remote_sensing"
-    SNAPSHOT_EPOCH: 1
+    MODEL_SAVE_DIR: "output/ocrnet_w64_bn_remote_sensing/cosine_50e"
+    SNAPSHOT_EPOCH: 3
     SYNC_BATCH_NORM: True
 TEST:
     TEST_MODEL: "output/ocrnet_w64_bn_remote_sensing/best_model"
 SOLVER:
     LR: 0.01
-#    LR_POLICY: "poly"
-    OPTIMIZER: "adam"
-    NUM_EPOCHS: 60
+    LR_POLICY: "cosine"
+    OPTIMIZER: "sgd"
+    NUM_EPOCHS: 50
 
-    LR_POLICY: "piecewise"
-    DECAY_EPOCH: [25, 45]
+#    LR_POLICY: "piecewise"
+#    DECAY_EPOCH: [25, 45]
